@@ -48,7 +48,7 @@ jobs:
           push: true
           #tags: ${{ steps.meta.outputs.tags }}
           tags: |
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
