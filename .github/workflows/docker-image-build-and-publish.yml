@@ -21,11 +21,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git clone https://github.com/cloudflare/cloudflared.git
-          ls -l
           mv cloudflared/* ./
-          ls -la cloudflared
-          rmdir cloudflared
-          ls -l
+          rmdir -f cloudflared
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
