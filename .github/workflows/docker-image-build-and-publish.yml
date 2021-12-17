@@ -6,15 +6,6 @@ on:
         description: 'Image version'     
         required: false
         default: 'latest'
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-        - info
-        - warning
-        - debug
 
 env:
   REGISTRY: ghcr.io
@@ -64,6 +55,7 @@ jobs:
           #tags: ${{ steps.meta.outputs.tags }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
