@@ -22,7 +22,7 @@ jobs:
         run: |
           git clone https://github.com/cloudflare/cloudflared.git
           ls -l
-          mv -r cloudflared ./
+          mv -R cloudflared ./
           rmdir cloudflared
 
       - name: Set up Docker Buildx
