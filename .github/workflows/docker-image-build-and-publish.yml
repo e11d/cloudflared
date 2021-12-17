@@ -21,6 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git clone https://github.com/cloudflare/cloudflared.git
+          ls -l
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -37,6 +38,10 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Debug
+        run: |
+          ls -l
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
