@@ -23,7 +23,7 @@ jobs:
           git clone https://github.com/cloudflare/cloudflared.git
           ls -l
           mv cloudflared/* ./
-          ls -l cloudflared
+          ls -la cloudflared
           rmdir cloudflared
           ls -l
 
