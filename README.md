@@ -1,8 +1,7 @@
 # cloudflared
 Docker image of `cloudflared` for arm64
 
-## Container registry (ghcr.io)
-https://github.com/e11d/cloudflared/pkgs/container/cloudflared  
+## Container registry (ghcr.io) 
 [Container registry](../../pkgs/container/cloudflared)
 
 ### GitHub
