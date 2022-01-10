@@ -27,7 +27,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git clone --single-branch https://github.com/cloudflare/cloudflared.git
-          mv cloudflared/. ./
+          shopt -s dotglob
+          mv cloudflared/* ./
+          shopt -u dotglob
           rm -rf cloudflared/
           
           if [ ${{ github.event.inputs.tag }} = "latest" || ${{ github.event.inputs.tag }} = "" ]; then
