@@ -2,10 +2,11 @@ name: Create and publish a Docker image
 on: 
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Image version'     
+      tag:
+        description: 'Image version (tag)'     
         required: false
-        default: 'latest'
+        # latest tag
+        default: git describe --tags --abbrev=0
 
 env:
   REGISTRY: ghcr.io
@@ -21,6 +22,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with: 
+          # checkout to tag
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.tag }}
 
       - name: Clone cloudflared repository
         env:
@@ -55,7 +60,7 @@ jobs:
           #tags: ${{ steps.meta.outputs.tags }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
