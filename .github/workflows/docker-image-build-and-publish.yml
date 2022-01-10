@@ -5,8 +5,7 @@ on:
       tag:
         description: 'Image version (tag)'     
         required: false
-        # latest tag
-        default: git describe --tags --abbrev=0
+        default: latest
 
 env:
   REGISTRY: ghcr.io
@@ -22,18 +21,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with: 
-          # checkout to tag
-          fetch-depth: 0
-          ref: ${{ github.event.inputs.tag }}
 
       - name: Clone cloudflared repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git clone --depth=1 https://github.com/cloudflare/cloudflared.git
-          mv cloudflared/* ./
-          rm -rf cloudflared
+          git clone --single-branch https://github.com/cloudflare/cloudflared.git .
+          if [ ${{ github.event.inputs.tag }} = "latest" || ${{ github.event.inputs.tag }} = "" ]; then
+            LATEST_TAG=$(git describe --tags --abbrev=0)
+          else
+            LATEST_TAG=${{ github.event.inputs.tag }}
+          fi
+          git checkout refs/tags/$LATEST_TAG
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
