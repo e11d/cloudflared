@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Image version (tag)'     
+        description: 'Image version (tag)'
         required: false
         default: latest
 
@@ -31,6 +31,8 @@ jobs:
           cp -r cloudflared/* ./
           shopt -u dotglob
           rm -rf cloudflared/
+          
+          echo ${{ github.event.inputs.tag }} = 'latest' || ${{ github.event.inputs.tag }} = ''
           
           if [ ${{ github.event.inputs.tag }} = 'latest' || ${{ github.event.inputs.tag }} = '' ]; then
             # latest tag
