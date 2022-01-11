@@ -28,7 +28,7 @@ jobs:
         run: |
           git clone --single-branch https://github.com/cloudflare/cloudflared.git
           shopt -s dotglob
-          mv cloudflared/* ./
+          cp -r cloudflared/* ./
           shopt -u dotglob
           rm -rf cloudflared/
           
