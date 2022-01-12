@@ -65,7 +65,7 @@ jobs:
           #tags: ${{ steps.meta.outputs.tags }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${BUILD_TAG}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ BUILD_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
