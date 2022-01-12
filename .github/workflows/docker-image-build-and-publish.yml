@@ -39,6 +39,8 @@ jobs:
             BUILD_TAG=${{ github.event.inputs.tag }}
           fi
           git checkout refs/tags/${BUILD_TAG}
+          
+          echo "BUILD_TAG=${BUILD_TAG}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -65,7 +67,7 @@ jobs:
           #tags: ${{ steps.meta.outputs.tags }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ BUILD_TAG }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BUILD_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
