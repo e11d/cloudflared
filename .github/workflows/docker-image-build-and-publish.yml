@@ -34,7 +34,7 @@ jobs:
           shopt -u dotglob
           rm -rf cloudflared/
           
-          if [ ${{ github.event.inputs.tag }} = 'latest' ] || [ ${{ github.event.inputs.tag }} = '' ]; then
+          if [ "${{ github.event.inputs.tag }}" = "latest" ] || [ "${{ github.event.inputs.tag }}" = "" ]; then
             # latest tag
             BUILD_TAG=$(git describe --tags --abbrev=0)
           else
